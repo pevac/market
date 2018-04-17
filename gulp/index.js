@@ -5,7 +5,6 @@ const task = require("./loader")(gulp);
 const config = require("./config");
 
 task("styles:tmp",  { src: config.src,  build: config.tmp });
-// task("postcss:tmp",  { src: config.src,  build: config.tmp });
 task("templates:tmp",  { src: config.src, build: config.tmp });
 task("eslint",  { src: config.src });
 task("fonts:build",  { src: config.src, build: config.build });

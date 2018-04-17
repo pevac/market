@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+                <ul class="list-group">
+                    <li class="list-group-item clearfix" ng-repeat="product in vm.cart">
+                        <div class="details pull-left">
+                            <p>Наим{{product.name}}</p>
+                            <p>{{product.type}}</p>
+                            <p>{{product.price}}</p>
+                        </div>
+                        <div class="sum pull-right">{{vm.totalSum(product)}}</div>
+                        <div class="amount pull-right">
+                            <div class="cart-amount">
+                                <ul>
+                                    <li><a>-</a></li>
+                                    <li><input type="number" class="amount-counter"/></li>
+                                    <li><a>+</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </div>
+</div>

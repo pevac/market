@@ -1,0 +1,23 @@
+
+li>.amount-counter{
+  height: inherit;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border:none;
+}
+
+.counter>li>input[type=number]:focus:not([readonly]){
+  border:none;
+  box-shadow: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+input[type=number].amount-counter { 
+ -moz-appearance:textfield; 
+ }

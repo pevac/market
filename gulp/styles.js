@@ -5,7 +5,22 @@ module.exports =  (options, $) => {
     const RELEASE = !!argv.release;
 
     return (done) => {
+        var injectFiles = $.gulp.src([
+            $.path.join(options.src.root, '/app/**/*.scss')
+        ], { read: false });
+
+        var injectOptions = {
+            transform: function(filePath) {
+                filePath = filePath.replace(options.src.root, '..');
+                return '@import "' + filePath + '";';
+            },
+            starttag: '// injector',
+            endtag: '// endinjector',
+            addRootSlash: false
+        };
+
         return $.combine( $.gulp.src(`${options.src.styles}/*.scss`),
+            $.inject(injectFiles, injectOptions),
             $.if(!RELEASE, $.sourcemaps.init()),
             $.sass(),
             $.autoprefixer({browsers: [    
@@ -15,7 +30,7 @@ module.exports =  (options, $) => {
                 "last 2 versions"
             ]}),
             $.if(!RELEASE, $.sourcemaps.write({sourceRoot: options.src.styles})),
-            // $.if(RELEASE, $.replace("../node_modules/bootstrap-sass/assets/fonts/bootstrap/", "../assets/fonts/bootstrap/")),
+            $.if(!RELEASE, $.replace("../fonts/bootstrap", "../../node_modules/bootstrap-sass/assets/fonts/bootstrap")),
             // $.if(RELEASE, $.combine($.cssnano(), $.rename({suffix: ".min", extname: ".css" }),  $.rev())),
             $.gulp.dest(options.build.styles),
             $.size({title: "styles"})

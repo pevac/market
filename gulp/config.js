@@ -6,9 +6,10 @@ const BUILD_BASE_DIR = "dist";
 exports.watch = {
     templates: SOURCE_BASE_DIR + "/app/**/*.html",
     app: SOURCE_BASE_DIR + "/app/**/*.js",
-    styles: SOURCE_BASE_DIR + "/sass/**/*.scss",
+    module: SOURCE_BASE_DIR + "/app/**/*.module.js",
+    styles: [SOURCE_BASE_DIR + "/sass/**/*.scss",SOURCE_BASE_DIR + "/app/**/*.scss"],
     fonts: SOURCE_BASE_DIR + "/assets/fonts/**/*.*",
-    img: SOURCE_BASE_DIR + "/assets/img/**/*.*",
+    images: SOURCE_BASE_DIR + "/assets/images/**/*.*",
     html : SOURCE_BASE_DIR + "/*.html",
     vendor : "./vendor.json"
 };
@@ -30,7 +31,7 @@ exports.build = {
     app: BUILD_BASE_DIR + "/js",
     styles: BUILD_BASE_DIR + "/styles",
     fonts: BUILD_BASE_DIR + "/assets/fonts",
-    img: BUILD_BASE_DIR + "/assets/img",
+    images: BUILD_BASE_DIR + "/assets/images",
     html : BUILD_BASE_DIR + "/",
     templates : {
         dir : BUILD_BASE_DIR + "/js",
@@ -43,11 +44,11 @@ exports.build = {
 exports.src = {
     root: SOURCE_BASE_DIR,
     templates: [ SOURCE_BASE_DIR + '/app/**/*.html' ],
-    app: [ SOURCE_BASE_DIR + '/app/**/!(*.spec|*.mock).js' ],
+    app: SOURCE_BASE_DIR + '/app/**/!(*.spec|*.mock).js' ,
     vendor: "./vendor.json",
     styles: SOURCE_BASE_DIR + "/sass/",
     fonts: [SOURCE_BASE_DIR + "/assets/fonts/**/*.*", "./node_modules/bootstrap-sass/assets/fonts/**/*.*"],
-    img: SOURCE_BASE_DIR + "/assets/img/**/*.*",
+    images: SOURCE_BASE_DIR + "/assets/images/**/*.*",
     html : SOURCE_BASE_DIR + "/*.html"
 }
 
