@@ -8,6 +8,9 @@
     function Catalog() {
         return {
             templateUrl: "app/catalog/catalog.tmpl.html",
+            bindings: {
+                products: "<"
+            },
             controller: "CatalogController",
             controllerAs: "vm"
         }

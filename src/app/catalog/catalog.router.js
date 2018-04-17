@@ -10,6 +10,11 @@
             .state("catalog", {
                 url: "/",
                 component: "catalog",
+                resolve: {
+                    products: ["DataService", function (DataService) {
+                        return DataService.getProducts();
+                    }]
+                }
             })
     }
     
