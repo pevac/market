@@ -4,7 +4,6 @@
         .config(RouterConfig);
 
     RouterConfig.$inject = ["$urlRouterProvider", "$stateProvider"];
-    // Using @ngInject annotations
     function RouterConfig( $urlRouterProvider, $stateProvider) {
 
         $urlRouterProvider.otherwise("/");
@@ -19,7 +18,6 @@
                 $location.replace().path(normalized);
             }
         });
-
     }
 
 })();

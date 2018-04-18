@@ -3,7 +3,7 @@
 
   angular
     .module("appModule")
-    .config(config);
+    .config(config)
 
   config.$inject = ["$logProvider"];
   function config($logProvider) {

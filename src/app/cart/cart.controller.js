@@ -4,23 +4,36 @@
     angular.module("cartModule")
         .controller("CartController", CartController);
 
-    CartController.$inject = ["$scope", "$localStorage", "$state"];
-
-    function CartController($scope, $localStorage, $state) {
+    CartController.$inject = ["$scope", "CartService", "$state"];
+    function CartController($scope, CartService, $state) {
         var vm = this;
 
-        vm.$storage = $localStorage;
+        vm.cart = CartService.get();
 
-        vm.totalSum = totalSum;
+        vm.totalSumProduct = totalSumProduct;
         vm.amountProduct = amountProduct;
         vm.deleteProduct = deleteProduct;
+        vm.isEmpty = cartIsEmpty;
+        vm.totalSum = totalSum;
 
-        function totalSum(product) {
+        function totalSum() {
+            var result = vm.cart.reduce(function (sum, current) {
+                return sum + current.price * current.count;
+            }, 0);
+
+            return result;
+        }
+
+        function totalSumProduct(product) {
             if(angular.isUndefined(product.count)){
                 product.count = 1;
             }
 
             return product.price * product.count;
+        }
+
+        function cartIsEmpty() {
+            return CartService.isEmpty();
         }
 
         function amountProduct(product, op) {
@@ -36,8 +49,8 @@
             }
         }
 
-        function deleteProduct(index) {
-            vm.$storage.cart.splice(index, 1)
+        function deleteProduct(id) {
+            CartService.remove(id)
         }
     }
 

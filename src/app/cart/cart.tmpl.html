@@ -1,10 +1,11 @@
 <div class="container-fluid">
-    <div class="row">
+    <h1 ng-if="vm.isEmpty()">Корзина пустая</h1>
+    <div class="row" ng-if="!vm.isEmpty()">
         <div class="col-xs-12">
                 <ul class="list-group">
-                    <li class="list-group-item clearfix" ng-repeat="product in vm.$storage.cart">
+                    <li class="list-group-item clearfix" ng-repeat="product in vm.cart">
                         <div class="pull-left">
-                            <a class="btn-delete" title="delete" ng-click="vm.deleteProduct($index)">
+                            <a class="btn-delete" title="delete" ng-click="vm.deleteProduct(product.id)">
                                 <span class="glyphicon glyphicon-remove-sign"></span>
                             </a>
                         </div>
@@ -13,7 +14,7 @@
                             <p></p>
                             <p>{{product.price}} грн.</p>
                         </div>
-                        <div class="sum pull-right">Сумма: {{vm.totalSum(product)}} грн.</div>
+                        <div class="sum pull-right">Сумма: {{vm.totalSumProduct(product)}} грн.</div>
                         <div class="amount pull-right">
                             <div class="cart-amount">
                                 <ul class="counter">
@@ -25,6 +26,12 @@
                         </div>
                     </li>
                 </ul>
+        </div>
+        <div class="col-xs-12">
+            <div class="pull-right">
+                <h3>Все вместе: {{vm.totalSum()}}грн.</h3>
+                <a class="btn btn-primary  btn-block">Оформить заказ</a>
+            </div>
         </div>
     </div>
 </div>

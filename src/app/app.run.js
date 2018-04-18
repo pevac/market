@@ -7,7 +7,6 @@
   
     runBlock.$inject = ["$log"];
     function runBlock($log) {
-  
       $log.debug("runBlock end");
     }
   

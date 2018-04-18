@@ -1,30 +1,64 @@
-// (function () {
-//     "use strict";
+(function () {
+    "use strict";
 
-//     angular.module("dataServiceModule", [])
-//         .factory("CartService", CartService);
+    angular.module("cartServiceModule", [])
+        .run(Cart)
+        .factory("CartService", CartService);
 
-//     CartService.$inject = ["$localStorage"];
-//     function CartService($localStorage) {
+    Cart.$inject = ["$localStorage"];
+    function Cart($localStorage) {
+        if (!angular.isArray($localStorage.cart)) {
+            $localStorage.$default({ cart: [] });
+        }
+    }
 
-//         return {
-//             get: get
-//         }
+    CartService.$inject = ["$localStorage"];
+    function CartService($localStorage) {
 
-//         function get() {
-//             return $localStorage.cart;
-//         }
+        return {
+            get: get,
+            add: add,
+            remove: remove,
+            getLenght: getLenght,
+            contain: contain,
+            isEmpty: isEmpty
+        }
 
-//         function add(value) {
-//             return $localStorage.cart.push(value);
-//         }
+        function get() {
+            return $localStorage.cart;
+        }
 
-//         function remove(index) {
-//             var cart = $localStorage.cart;
-//             cart.splice(index, 1);
-//             $localStorage.cart = cart;
-            
-//         }
+        function add(value) {
+            if(contain(value)) return;
 
-//     }
-// })();
+            $localStorage.cart.push(value);
+        }
+
+        function remove(value) {
+            var index = $localStorage.cart.findIndex(function (item) {
+                return item.id == value;
+            });
+
+            if(index == -1) return;
+
+            $localStorage.cart.splice(index, 1);
+        }
+
+        function getLenght() {
+            return $localStorage.cart.length;
+        }
+
+        function isEmpty() {
+            return $localStorage.cart.length <= 0
+        }
+
+        function contain(value) {
+            var arr = $localStorage.cart.filter(function (item) {
+                return item.id == value.id;
+            });
+
+            return arr.length > 0;
+        }
+    }
+
+})();

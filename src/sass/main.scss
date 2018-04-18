@@ -2,3 +2,16 @@
 // injector
 // endinjector
 
+.custom-panel{
+    height: 100%;
+    
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex>.col-flex{
+    padding-bottom: 15px;
+}
