@@ -11,7 +11,9 @@
         vm.$onInit = activate;
 
         function activate() {
-            vm.cart = CartService.get();
+            CartService.get().then(function (data) {
+                vm.cart = data;
+            });
         }
     }
 

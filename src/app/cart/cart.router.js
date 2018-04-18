@@ -10,6 +10,11 @@
             .state("cart", {
                 url: "/cart",
                 component: "cart",
+                resolve: {
+                    cart: ["CartService",function (CartService) {
+                        return CartService.get();
+                    }]
+                }
             })
     }
     

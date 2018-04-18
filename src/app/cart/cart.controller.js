@@ -8,16 +8,11 @@
     function CartController($scope, CartService, $state) {
         var vm = this;
 
-        vm.$onInit = activate;
         vm.totalSumProduct = totalSumProduct;
         vm.amountProduct = amountProduct;
         vm.deleteProduct = deleteProduct;
         vm.isEmpty = cartIsEmpty;
         vm.totalSum = totalSum;
-
-        function activate() {
-            vm.cart = CartService.get();
-        }
 
         function totalSum() {
             var result = vm.cart.reduce(function (sum, current) {
@@ -40,16 +35,23 @@
         }
 
         function amountProduct(product, op) {
+            var prod = angular.copy(product);
             switch (op) {
                 case "increase":
-                    ++product.count;
+                    ++prod.count;
                     break;
                 case "decrease":
-                    product.count = product.count <= 1 ? 1 : --product.count;
+                    prod.count = prod.count <= 1 ? 1 : --prod.count;
                     break;
                 default:
                     break;
             }
+
+            CartService.update(prod).then(function () {
+                $state.transitionTo($state.current, $state.params, {
+                    reload: true, inherit: false, notify: true
+                });
+            });
         }
 
         function deleteProduct(id) {
