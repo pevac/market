@@ -7,7 +7,9 @@
 
     function Navigation() {
       return {
-        templateUrl: "app/layout/navbar.html"
+        templateUrl: "app/layout/navbar.html",
+        controller: "NavbarController",
+        controllerAs: "vm"
       }
     }
 })();

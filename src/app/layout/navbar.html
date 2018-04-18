@@ -5,7 +5,12 @@
         <li><a ui-sref="catalog" ui-sref-active="active">Products</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a ui-sref="cart" ui-sref-active="active">Корзина<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+        <li>
+          <a ui-sref="cart" ui-sref-active="active">Корзина
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <span ng-if="vm.cart.length > 0" class="cart-count">{{vm.cart.length}}</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

@@ -14,7 +14,6 @@
 
     CartService.$inject = ["$localStorage"];
     function CartService($localStorage) {
-
         return {
             get: get,
             add: add,

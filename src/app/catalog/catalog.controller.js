@@ -19,7 +19,6 @@
         function containProduct(product) {
             return CartService.contain(product);
         }
-
     }
 
 })();

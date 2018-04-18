@@ -8,13 +8,16 @@
     function CartController($scope, CartService, $state) {
         var vm = this;
 
-        vm.cart = CartService.get();
-
+        vm.$onInit = activate;
         vm.totalSumProduct = totalSumProduct;
         vm.amountProduct = amountProduct;
         vm.deleteProduct = deleteProduct;
         vm.isEmpty = cartIsEmpty;
         vm.totalSum = totalSum;
+
+        function activate() {
+            vm.cart = CartService.get();
+        }
 
         function totalSum() {
             var result = vm.cart.reduce(function (sum, current) {
